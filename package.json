@@ -1,0 +1,15 @@
+{
+  "name": "wsedit",
+  "version": "0.1.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "wscodec": "^0.3.0"
+  }
+}
