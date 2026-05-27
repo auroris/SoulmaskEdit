@@ -1,17 +1,65 @@
 {
-  "name": "SoulmaskEdit",
+  "name": "wsedit",
   "version": "0.1.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
+  "description": "Middle tier for Soulmask saved-game editing. Sits between wscodec (byte-level actor_data codec) and the browser UI: reads world.db rows, indexes GUID-based relationships, builds compound objects (inventory containers, owned entities, etc.), and stashes/transfers them between saves.",
+  "type": "module",
+  "main": "./dist/wsedit.cjs",
+  "module": "./src/wsedit.mjs",
+  "unpkg": "./dist/wsedit.global.js",
+  "jsdelivr": "./dist/wsedit.global.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/wsedit.d.mts",
+      "import": "./src/wsedit.mjs",
+      "require": "./dist/wsedit.cjs",
+      "default": "./src/wsedit.mjs"
+    }
+  },
+  "files": [
+    "src/",
+    "dist/",
+    "docs/",
+    "README.md"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node scripts/build.mjs && tsc && npm run docs",
+    "docs": "typedoc",
+    "prepublishOnly": "npm run build",
+    "test": "node test/run-all.mjs",
+    "test:classify": "node test/test-classify.mjs",
+    "test:relations": "node test/test-relations.mjs",
+    "update": "npx npm-check-updates -u && npm install"
+  },
+  "keywords": [
+    "soulmask",
+    "world.db",
+    "actor_table",
+    "save-editor",
+    "unreal",
+    "ue4"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auroris/SoulmaskEdit.git"
+  },
+  "homepage": "https://github.com/auroris/SoulmaskEdit#readme",
+  "bugs": {
+    "url": "https://github.com/auroris/SoulmaskEdit/issues"
+  },
+  "author": "auroris",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "wscodec": "^0.6.1"
   },
   "devDependencies": {
     "better-sqlite3": "^12.10.0",
+    "esbuild": "^0.28.0",
     "lz4-wasm-nodejs": "^0.9.2",
-    "wscodec": "^0.3.0"
+    "typedoc": "^0.28.19",
+    "typedoc-plugin-markdown": "^4.11.0",
+    "typescript": "^6.0.3"
   }
 }
